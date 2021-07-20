@@ -1,0 +1,7 @@
+name: TMessages
+version: @version@
+main: xyz.tozymc.spigot.tmessages.TMessagesPlugin
+api-version: 1.17
+softdepend: [ PlaceholderAPI ]
+authors: [ TozyMC ]
+description: Makes your server messages more customized!
