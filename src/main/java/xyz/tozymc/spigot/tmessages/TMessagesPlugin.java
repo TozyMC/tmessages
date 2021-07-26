@@ -13,6 +13,7 @@ public final class TMessagesPlugin extends JavaPlugin {
   @Override
   public void onEnable() {
     instance = this;
+    saveDefaultConfig();
   }
 
   @Override
