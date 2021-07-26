@@ -2,10 +2,12 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'java'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 group = 'xyz.tozymc.spigot'
 version = '1.0-pre-release'
+description = 'Makes your server messages more customized!'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -20,14 +22,32 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven {
+        name = 'placeholderapi-repo'
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly 'me.clip:placeholderapi:2.10.10'
+
+    implementation 'xyz.tozymc.spigot:title-api:1.0-pre-release'
+    implementation('xyz.tozymc.spigot:commands-api:2.1') {
+        exclude group: 'org.spigotmc', module: 'spigot-api'
+        exclude group: 'org.jetbrains', module: 'annotations-java5'
+    }
 }
 
 processResources {
-    from(sourceSets.main.resources.srcDirs) {
-        filter ReplaceTokens, tokens: [version: version]
-    }
+    filter ReplaceTokens, tokens: [version: version.toString(), description: description]
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+shadowJar {
+    minimize()
+    archiveClassifier.set('')
 }
