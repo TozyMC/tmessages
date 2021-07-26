@@ -1,0 +1,26 @@
+Event:
+  Enable: true
+  Join: '&a{player} joined!'
+  Quit: '&c{player} left!'
+Chat:
+  General:
+    Enable: true
+    Format: '&f{player}: &f{message}'
+  Broadcast:
+    Enable: true
+    Format: '&7[&cTM&7] &7{message}'
+    ChatPrefix: '!'
+    Permission: 'tmessages.chat.broadcast'
+  Global:
+    Enable: true
+    Format: '&7[&6GLOBAL&7] &f{player}: &7{message}'
+    ChatPrefix: '@'
+    Permission: 'tmessages.chat.global'
+  Local:
+    Enable: true
+    Format: '&7[&b{world}&7] &f{player}: &7{message}'
+    ChatPrefix: '#'
+    Permission: 'tmessages.chat.local'
+Messages:
+  NoPermission: '&cYou don''t have permission to do that!'
+  ConfigReload: '&aConfig has been reloaded!'
