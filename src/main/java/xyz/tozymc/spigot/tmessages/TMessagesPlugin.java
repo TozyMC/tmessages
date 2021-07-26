@@ -1,6 +1,7 @@
 package xyz.tozymc.spigot.tmessages;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.tozymc.spigot.tmessages.listener.PlayerListener;
 
 public final class TMessagesPlugin extends JavaPlugin {
 
@@ -14,6 +15,8 @@ public final class TMessagesPlugin extends JavaPlugin {
   public void onEnable() {
     instance = this;
     saveDefaultConfig();
+
+    getServer().getPluginManager().registerEvents(new PlayerListener(), this);
   }
 
   @Override
