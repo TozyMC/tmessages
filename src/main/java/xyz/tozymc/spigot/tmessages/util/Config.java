@@ -1,16 +1,17 @@
 package xyz.tozymc.spigot.tmessages.util;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import xyz.tozymc.spigot.api.title.util.Colors;
 import xyz.tozymc.spigot.tmessages.TMessagesPlugin;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public enum Config {
   EVENT_ENABLE("Event.Enable"),
@@ -71,13 +72,15 @@ public enum Config {
   }
 
   public String format(Player player) {
-    String val = getString();
-    val = Colors.color(val);
-    return PlaceholderAPI.setPlaceholders(player, val);
+    return PlaceholderAPI.setPlaceholders(player, getColored());
   }
 
   public String getString() {
     return CONFIG.getString(path);
+  }
+
+  public String getColored() {
+    return Colors.color(Objects.requireNonNull(CONFIG.getString(path)));
   }
 
   public int getInt() {
