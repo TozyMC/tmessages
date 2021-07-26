@@ -32,7 +32,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.10.10'
 
-    implementation 'xyz.tozymc.spigot:title-api:1.0-pre-release'
+    implementation 'xyz.tozymc.spigot:title-api:1.0'
     implementation('xyz.tozymc.spigot:commands-api:2.1') {
         exclude group: 'org.spigotmc', module: 'spigot-api'
         exclude group: 'org.jetbrains', module: 'annotations-java5'
