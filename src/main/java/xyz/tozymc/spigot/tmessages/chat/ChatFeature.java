@@ -32,6 +32,9 @@ public class ChatFeature {
     if (!enable) {
       return false;
     }
+    if (prefix == null) {
+      return false;
+    }
     boolean requested = event.getMessage().startsWith(prefix);
     if (!requested) {
       return false;
