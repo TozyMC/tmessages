@@ -31,11 +31,13 @@ public class ChatFeature {
       boolean console) {
     ChatFormatter formatter = new ChatFormatter(this);
     formatter.sender(sender).text(message);
-    variables.forEach((var, function) -> {
-      if (sender != null) {
-        formatter.placeholder(var, function.apply(sender));
-      }
-    });
+    if (variables != null) {
+      variables.forEach((var, function) -> {
+        if (sender != null) {
+          formatter.placeholder(var, function.apply(sender));
+        }
+      });
+    }
     String format = formatter.format();
     receives.forEach(receive -> receive.sendMessage(format));
     if (console) {
