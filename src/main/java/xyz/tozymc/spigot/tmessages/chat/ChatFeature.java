@@ -27,8 +27,7 @@ public class ChatFeature {
     }
   }
 
-  public void chat(Player sender, String message, Collection<? extends Player> receives,
-      boolean console) {
+  public void chat(Player sender, String message, Collection<? extends Player> receives) {
     ChatFormatter formatter = new ChatFormatter(this);
     formatter.sender(sender).text(message);
     if (variables != null) {
@@ -40,13 +39,11 @@ public class ChatFeature {
     }
     String format = formatter.format();
     receives.forEach(receive -> receive.sendMessage(format));
-    if (console) {
-      Bukkit.getConsoleSender().sendMessage(format);
-    }
+    Bukkit.getConsoleSender().sendMessage(format);
   }
 
-  public void chat(String message, Collection<? extends Player> receives, boolean console) {
-    chat(null, message, receives, console);
+  public void chat(String message, Collection<? extends Player> receives) {
+    chat(null, message, receives);
   }
 
   public void addVariable(String var, Function<Player, String> function) {

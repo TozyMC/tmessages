@@ -78,15 +78,15 @@ public final class ChatManager {
   }
 
   public void chatToAllPlayers(ChatFeature feature, Player sender, String message) {
-    feature.chat(sender, message, Bukkit.getOnlinePlayers(), true);
+    feature.chat(sender, message, Bukkit.getOnlinePlayers());
   }
 
   public void chatToWorldPlayers(ChatFeature feature, Player sender, String message) {
-    feature.chat(sender, message, sender.getWorld().getPlayers(), false);
+    feature.chat(sender, message, sender.getWorld().getPlayers());
   }
 
   public void broadcast(ChatFeature feature, String message) {
-    feature.chat(message, Bukkit.getOnlinePlayers(), true);
+    feature.chat(message, Bukkit.getOnlinePlayers());
   }
 
   public ChatFeature getFeature(FeatureType type) {
