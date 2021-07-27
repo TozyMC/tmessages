@@ -29,7 +29,7 @@ public final class ChatManager {
     Bukkit.getPluginManager().registerEvents(new PlayerChatListener(this), plugin);
   }
 
-  public void reloadFeature() {
+  public void reloadFeatures() {
     features.clear();
     features.put(FeatureType.GENERAL, new ChatFeature(CHAT_GENERAL_SECTION.getMap()));
     features.put(FeatureType.BROADCAST, new ChatFeature(CHAT_BROADCAST_SECTION.getMap()));
