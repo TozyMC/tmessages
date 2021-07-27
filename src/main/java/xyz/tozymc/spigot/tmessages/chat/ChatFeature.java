@@ -1,6 +1,12 @@
 package xyz.tozymc.spigot.tmessages.chat;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import xyz.tozymc.spigot.api.util.bukkit.permission.PermissionWrapper;
 
 public class ChatFeature {
@@ -9,6 +15,7 @@ public class ChatFeature {
   private final String format;
   private String prefix;
   private PermissionWrapper permission;
+  private Map<String, Function<Player, String>> variables;
 
   public ChatFeature(Map<String, Object> map) {
     this.enable = (boolean) map.get("Enable");
@@ -19,6 +26,49 @@ public class ChatFeature {
     if (map.containsKey("Permission")) {
       this.permission = PermissionWrapper.of(String.valueOf(map.get("Permission")));
     }
+  }
+
+  public boolean requestEvent(AsyncPlayerChatEvent event) {
+    if (!enable) {
+      return false;
+    }
+    boolean requested = event.getMessage().startsWith(prefix);
+    if (!requested) {
+      return false;
+    }
+    if (permission.notHas(event.getPlayer())) {
+      return false;
+    }
+    event.setCancelled(true);
+    return true;
+  }
+
+  public void chat(Player sender, String message, Collection<? extends Player> receives,
+      boolean console) {
+    ChatFormatter formatter = new ChatFormatter(this);
+    formatter.sender(sender).text(message);
+    variables.forEach((var, function) -> {
+      if (sender != null) {
+        formatter.placeholder(var, function.apply(sender));
+      }
+    });
+    String format = formatter.format();
+    receives.forEach(receive -> receive.sendMessage(format));
+    if (console) {
+      Bukkit.getConsoleSender().sendMessage(format);
+    }
+  }
+
+  public void chat(String message, Collection<? extends Player> receives, boolean console) {
+    chat(null, message, receives, console);
+  }
+
+  public void addVariable(String var, Function<Player, String> function) {
+    if (variables == null) {
+      variables = new HashMap<>();
+    }
+
+    variables.put(var, function);
   }
 
   public boolean isEnable() {
