@@ -7,6 +7,7 @@ import static xyz.tozymc.spigot.tmessages.util.Config.CHAT_LOCAL_SECTION;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.tozymc.spigot.tmessages.chat.listener.PlayerChatListener;
 
@@ -33,7 +34,10 @@ public final class ChatManager {
     features.put(FeatureType.GENERAL, new ChatFeature(CHAT_GENERAL_SECTION.getMap()));
     features.put(FeatureType.BROADCAST, new ChatFeature(CHAT_BROADCAST_SECTION.getMap()));
     features.put(FeatureType.GLOBAL, new ChatFeature(CHAT_GLOBAL_SECTION.getMap()));
-    features.put(FeatureType.LOCAL, new ChatFeature(CHAT_LOCAL_SECTION.getMap()));
+
+    ChatFeature chatLocalFeature = new ChatFeature(CHAT_LOCAL_SECTION.getMap());
+    chatLocalFeature.addVariable("world", player -> player.getWorld().getName());
+    features.put(FeatureType.LOCAL, chatLocalFeature);
   }
 
   public void chat(Entry<FeatureType, ChatFeature> featureEntry, Player sender, String message) {
