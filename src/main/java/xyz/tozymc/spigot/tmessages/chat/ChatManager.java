@@ -40,6 +40,25 @@ public final class ChatManager {
     features.put(FeatureType.LOCAL, chatLocalFeature);
   }
 
+  public boolean requestEvent(ChatFeature feature, AsyncPlayerChatEvent event) {
+    if (!feature.isEnable()) {
+      return false;
+    }
+    String prefix = feature.getPrefix();
+    if (prefix == null) {
+      return false;
+    }
+    boolean requested = event.getMessage().startsWith(prefix);
+    if (!requested) {
+      return false;
+    }
+    if (feature.getPermission().notHas(event.getPlayer())) {
+      return false;
+    }
+    event.setCancelled(true);
+    return true;
+  }
+
   public void chat(Entry<FeatureType, ChatFeature> featureEntry, Player sender, String message) {
     FeatureType type = featureEntry.getKey();
     ChatFeature feature = featureEntry.getValue();

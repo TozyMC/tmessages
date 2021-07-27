@@ -28,24 +28,6 @@ public class ChatFeature {
     }
   }
 
-  public boolean requestEvent(AsyncPlayerChatEvent event) {
-    if (!enable) {
-      return false;
-    }
-    if (prefix == null) {
-      return false;
-    }
-    boolean requested = event.getMessage().startsWith(prefix);
-    if (!requested) {
-      return false;
-    }
-    if (permission.notHas(event.getPlayer())) {
-      return false;
-    }
-    event.setCancelled(true);
-    return true;
-  }
-
   public void chat(Player sender, String message, Collection<? extends Player> receives,
       boolean console) {
     ChatFormatter formatter = new ChatFormatter(this);
