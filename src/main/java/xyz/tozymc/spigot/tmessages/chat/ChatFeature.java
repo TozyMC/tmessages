@@ -1,11 +1,9 @@
 package xyz.tozymc.spigot.tmessages.chat;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import xyz.tozymc.spigot.api.util.bukkit.permission.PermissionWrapper;
 
-public class ChatFeature implements ConfigurationSerializable {
+public class ChatFeature {
 
   private final boolean enable;
   private final String format;
@@ -21,16 +19,6 @@ public class ChatFeature implements ConfigurationSerializable {
     if (map.containsKey("Permission")) {
       this.permission = PermissionWrapper.of(String.valueOf(map.get("Permission")));
     }
-  }
-
-  @Override
-  public Map<String, Object> serialize() {
-    Map<String, Object> map = new LinkedHashMap<>();
-    map.put("Enable", enable);
-    map.put("Format", format);
-    map.put("ChatPrefix", prefix);
-    map.put("Permission", permission.getPermission());
-    return map;
   }
 
   public boolean isEnable() {
