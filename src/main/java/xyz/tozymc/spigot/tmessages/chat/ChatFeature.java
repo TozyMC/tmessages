@@ -1,12 +1,13 @@
 package xyz.tozymc.spigot.tmessages.chat;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import xyz.tozymc.spigot.api.util.bukkit.permission.PermissionWrapper;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import xyz.tozymc.spigot.api.util.bukkit.permission.PermissionWrapper;
 
 public class ChatFeature {
 
@@ -29,7 +30,7 @@ public class ChatFeature {
 
   public void chat(Player sender, String message, Collection<? extends Player> receives) {
     ChatFormatter formatter = new ChatFormatter(this);
-    formatter.sender(sender).text(message);
+    formatter.player(sender).message(message);
     if (variables != null) {
       variables.forEach((var, function) -> {
         if (sender != null) {
