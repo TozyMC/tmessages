@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import org.bukkit.entity.Player;
 import xyz.tozymc.spigot.api.title.util.Colors;
-import xyz.tozymc.spigot.tmessages.TMessagesPlugin;
 
 public class Formatter {
 
@@ -41,22 +40,13 @@ public class Formatter {
     }
 
     if (player != null) {
-      setPlaceholders();
-
-      placeholders.put("player", player.getName());
-      placeholders.put("name", player.getName());
-      placeholders.put("displayname", player.getDisplayName());
+      Placeholders.addPlayerPlaceholders(player, placeholders);
+      text = Placeholders.setPlaceholderApi(player, text);
     }
 
     color();
     format0();
     return text;
-  }
-
-  private void setPlaceholders() {
-    if (TMessagesPlugin.getInstance().isPapiSupport()) {
-      text = PlaceholderApiHelper.setPlaceholders(player, text);
-    }
   }
 
   private void color() {
