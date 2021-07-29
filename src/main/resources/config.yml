@@ -5,15 +5,15 @@ Event:
 Chat:
   General:
     Enable: true
-    Format: '&f{player}: &f{message}'
+    Format: '&f{player}: &7{message}'
   Broadcast:
     Enable: true
-    Format: '&7[&cTM&7] &7{message}'
+    Format: '&7[&cTM&7] &a{message}'
     ChatPrefix: '!'
     Permission: 'tmessages.chat.broadcast'
   Global:
     Enable: true
-    Format: '&7[&6GLOBAL&7] &f{player}: &7{message}'
+    Format: '&7[&6GLOBAL&7] &f{player}: &f{message}'
     ChatPrefix: '@'
     Permission: 'tmessages.chat.global'
   Local:
@@ -21,6 +21,3 @@ Chat:
     Format: '&7[&b{world}&7] &f{player}: &7{message}'
     ChatPrefix: '#'
     Permission: 'tmessages.chat.local'
-Messages:
-  NoPermission: '&cYou don''t have permission to do that!'
-  ConfigReload: '&aConfig has been reloaded!'

@@ -18,7 +18,9 @@ public enum Config {
   CHAT_LOCAL_SECTION("Chat.Local"),
 
   MESSAGES_NO_PERMISSION("Messages.NoPermission"),
-  MESSAGES_CONFIG_RELOAD("Messages.ConfigReload");
+  MESSAGES_NO_PLAYER("Messages.NoPlayer"),
+  MESSAGES_CONFIG_RELOAD("Messages.ConfigReload"),
+  MESSAGES_TITLE_SENT("Messages.TitleSent");
 
   private static final FileConfiguration CONFIG;
 
